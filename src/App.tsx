@@ -428,7 +428,8 @@ function App() {
 		setVolume(settings.volume)
 
 		if (!videoRef.current) return
-		videoRef.current.volume = settings.volume / 100
+		const vol = settings.volume / 100
+		videoRef.current.volume = !Number.isFinite(vol) ? 1 : vol
 		videoRef.current.muted = settings.muted === 'true'
 	}, [])
 

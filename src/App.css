@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+body {
+  @apply overflow-hidden;
+}
+
+#root {
+  @apply size-full min-w-screen min-h-screen;
+}
+
+input[type="range"] {
+  @apply appearance-none w-full cursor-pointer overflow-hidden rounded-[5px];
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  @apply h-3  rounded-2xl;
+  background: #bbb;
+}
+input[type="range"]::-moz-range-track {
+  @apply h-2.5 rounded-2xl;
+  background: #999;
+}
+input[type="range"]::-webkit-slider-thumb {
+  @apply appearance-none size-3 bg-[white] shadow-[-407px_0_0_400px_#2563eb] rounded-[99999999px] border-2 border-solid border-[#1e40af];
+  -webkit-appearance: none;
+}
+input[type="range"]::-moz-range-thumb {
+  @apply size-3 bg-white border shadow-[-407px_0_0_400px_#2d2a7b] rounded-[99999999px] border-solid border-[#22245f];
+}
+
+.time.hidden {
+  opacity: 0;
+}
+
+.time {
+  transition: all 0.3s ease allow-discrete;
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+.big-icon.hidden {
+  opacity: 0;
+  scale: 0.7;
+}
+
+.big-icon {
+  opacity: 1;
+  scale: 1;
+  transition: all 0.4s ease allow-discrete;
+
+  @starting-style {
+    opacity: 0;
+    scale: 0.7;
+  }
+}
+
+.big-icon svg {
+  @apply bg-gray-700/50 p-2 rounded-full;
+}
+
+.seek-loader.hidden {
+  opacity: 0;
+}
+
+.seek-loader {
+  opacity: 1;
+  transition: all 0.2s ease allow-discrete;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+.seek-loader::after {
+  @apply absolute m-auto size-8 md:size-10 bg-gray-800/60 blur-xl inset-0 -z-10;
+  content: "";
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.side-menu {
+  opacity: 1;
+  translate: 0;
+  transition: display 0.2s ease 0.1s allow-discrete,
+    translate 0.5s ease 0.1s allow-discrete,
+    opacity 0.3s ease 0.1s allow-discrete;
+
+  @starting-style {
+    translate: 30px 0;
+    opacity: 0;
+  }
+}
+
+.side-menu.hidden {
+  opacity: 0;
+  translate: 0;
+}
+
+.overlay-side-menu {
+  opacity: 1;
+  transition: display 0.2s ease allow-discrete, opacity 0.2s ease;
+
+  @starting-style {
+    opacity: 0.8;
+  }
+}
+
+.overlay-side-menu.hidden {
+  opacity: 0;
+}

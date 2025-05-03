@@ -8,6 +8,8 @@ import Settings from './icons/Settings'
 import Close from './icons/X'
 import Upload from './icons/Upload'
 import { getSettings, saveSettings } from './utils/settings'
+import { TimeControl } from './components/TimeControl'
+import { formatTime } from './utils/player'
 
 type SettingsType = {
 	videoUrl?: string | null
@@ -71,12 +73,6 @@ function App() {
 	const handleTimeUpdate = useCallback(() => {
 		if (!videoRef.current) return
 		setCurrentTime(videoRef.current.currentTime)
-	}, [])
-
-	const formatTime = useCallback((time: number) => {
-		const minutes = Math.floor(time / 60)
-		const seconds = Math.floor(time % 60)
-		return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
 	}, [])
 
 	const handleKeyDown = useCallback(
@@ -187,24 +183,21 @@ function App() {
 		[togglePlay, toggleMute, isMuted, settings.frames]
 	)
 
-	const handleChangeRangeTime = useCallback(
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			if (!videoRef.current) return
+	const handleChangeRangeTime = useCallback((newTime: number) => {
+		if (!videoRef.current) return
 
-			setCurrentTime(Number(e.target.value))
-			videoRef.current.currentTime = Number(e.target.value)
-		},
-		[]
-	)
+		setCurrentTime(newTime)
+		videoRef.current.currentTime = newTime
+	}, [])
 
 	const handleChangeRangeVolume = useCallback(
-		(e: React.ChangeEvent<HTMLInputElement>) => {
+		(newVol: number) => {
 			if (!videoRef.current) return
-			if (isMuted && Number(e.target.value) >= 1) toggleMute()
+			if (isMuted && newVol >= 1) toggleMute()
 
-			setVolume(Number(e.target.value))
-			videoRef.current.volume = Number(e.target.value) / 100
-			saveSettings('volume', Number(e.target.value).toString())
+			setVolume(Number(newVol))
+			videoRef.current.volume = newVol / 100
+			saveSettings('volume', Number(newVol).toString())
 		},
 		[toggleMute, isMuted]
 	)
@@ -470,13 +463,13 @@ function App() {
 							<div className="text-gray-300 text-sm ">
 								{formatTime(currentTime)}
 							</div>
-							<div className="w-full flex items-center">
-								<input
-									type="range"
+							<div className="w-8/12 md:w-11/12 flex items-center mx-auto">
+								<TimeControl
 									max={duration}
-									min={0}
 									value={currentTime}
 									onChange={handleChangeRangeTime}
+									type="video"
+									min={0}
 								/>
 							</div>
 							<div className="text-gray-300 text-sm ">
@@ -506,14 +499,15 @@ function App() {
 											<VolumeActive className="size-5 md:size-6" />
 										)}
 									</div>
-									<input
-										className="h-2 md:h-3 max-w-2/4 md:max-w-full"
-										type="range"
-										min={0}
-										max={100}
-										value={isMuted ? 0 : volume}
-										onChange={handleChangeRangeVolume}
-									/>
+									<div className="w-30 max-w-2/4 md:max-w-full">
+										<TimeControl
+											max={100}
+											value={isMuted ? 0 : volume}
+											onChange={handleChangeRangeVolume}
+											type="volume"
+											min={0}
+										/>
+									</div>
 								</div>
 							</div>
 

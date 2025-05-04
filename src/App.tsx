@@ -11,16 +11,8 @@ import { getSettings, saveSettings } from './utils/settings'
 import { TimeControl } from './components/TimeControl'
 import { formatTime } from './utils/player'
 import Minimize from './icons/Minimize'
-
-type SettingsType = {
-	videoUrl?: string | null
-	fileVideo?: File | null
-	frames: number
-	velocity: number
-	muted: boolean
-	isPlaying: boolean
-	volume: number
-}
+import { Video } from '@/components/Video'
+import type { BigIconVideoType, SettingsType } from '@/types'
 
 function App() {
 	const [isPlaying, setIsPlaying] = useState(false)
@@ -31,10 +23,10 @@ function App() {
 	const videoRef = useRef<HTMLVideoElement>(null)
 	const containerVideoRef = useRef<HTMLDivElement>(null)
 	const [isShowingControls, setIsShowingControls] = useState(false)
-	const timeoutRef = useRef<number | null>(null)
-	const iconShowTimeoutRef = useRef<number | null>(null)
+	const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+	const iconShowTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 	const settingsFormRef = useRef<HTMLFormElement>(null)
-	const [iconShow, setIconShow] = useState<'play' | 'pause' | null>(null)
+	const [iconShow, setIconShow] = useState<BigIconVideoType>(null)
 	const [isSeeking, setIsSeeking] = useState(false)
 	const [isSideMenuOpen, setIsSideMenuOpen] = useState(false)
 	const [settings, setSettings] = useState<SettingsType>({
@@ -461,17 +453,15 @@ function App() {
 		<main className="bg-gradient-to-b from-slate-900 to-indigo-900 size-full min-h-screen min-w-screen py-6 flex flex-row fullscreen:pt-0">
 			<div className="flex flex-col w-full h-fit max-w-11/12 md:max-w-5xl fullscreen:max-w-full fullscreen:h-screen mx-auto bg-black text-white rounded-lg overflow-hidden">
 				<div className="relative size-full" ref={containerVideoRef}>
-					<video
-						ref={videoRef}
+					<Video
+						videoRef={videoRef}
 						className="size-full bg-black"
 						onTimeUpdate={handleTimeUpdate}
 						onLoadedMetadata={handleLoadedMetadata}
 						onSeeking={handleSeeking}
 						onSeeked={handleSeeked}
-					>
-						<source src={settings.videoUrl || undefined} type="video/mp4" />
-						Your browser does not support the video tag.
-					</video>
+						settings={settings}
+					/>
 
 					{/* Play - Pause icon  */}
 					<div

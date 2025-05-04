@@ -458,12 +458,12 @@ function App() {
 	}, [])
 
 	return (
-		<main className="bg-gradient-to-b from-slate-900 to-indigo-900 size-full min-h-screen min-w-screen py-10 flex flex-row fullscreen:pt-0">
-			<div className="flex flex-col w-full h-fit max-w-11/12 md:max-w-4xl fullscreen:max-w-full fullscreen:h-screen aspect-video mx-auto bg-black text-white rounded-lg overflow-hidden">
+		<main className="bg-gradient-to-b from-slate-900 to-indigo-900 size-full min-h-screen min-w-screen py-6 flex flex-row fullscreen:pt-0">
+			<div className="flex flex-col w-full h-fit max-w-11/12 md:max-w-5xl fullscreen:max-w-full fullscreen:h-screen mx-auto bg-black text-white rounded-lg overflow-hidden">
 				<div className="relative size-full" ref={containerVideoRef}>
 					<video
 						ref={videoRef}
-						className="size-full aspect-video bg-black "
+						className="size-full bg-black"
 						onTimeUpdate={handleTimeUpdate}
 						onLoadedMetadata={handleLoadedMetadata}
 						onSeeking={handleSeeking}

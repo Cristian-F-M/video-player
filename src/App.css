@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant fullscreen (&:where(.full-screen, .full-screen *));
 
 body {
   @apply overflow-hidden;

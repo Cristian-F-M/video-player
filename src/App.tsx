@@ -250,17 +250,13 @@ function App() {
 	)
 
 	const requestFullScreen = useCallback(() => {
-		if (getIsFullScreen()) return
-
 		document.documentElement.classList.add('full-screen')
-		document.documentElement.requestFullscreen()
+		if (!getIsFullScreen()) document.documentElement.requestFullscreen()
 	}, [getIsFullScreen])
 
 	const exitFullscreen = useCallback(() => {
-		if (!getIsFullScreen()) return
-
 		document.documentElement.classList.remove('full-screen')
-		document.exitFullscreen()
+		if (getIsFullScreen()) document.exitFullscreen()
 		setWasFullScreen(false)
 	}, [getIsFullScreen])
 

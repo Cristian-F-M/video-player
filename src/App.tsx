@@ -461,6 +461,7 @@ function App() {
 						onSeeking={handleSeeking}
 						onSeeked={handleSeeked}
 						settings={settings}
+						onEnd={() => setIsPlaying(false)}
 					/>
 
 					{/* Play - Pause icon  */}

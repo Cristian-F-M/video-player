@@ -7,6 +7,7 @@ export function Video({
 	onSeeking,
 	onSeeked,
 	settings,
+  onEnd,
 	...props
 }: {
 	videoRef: React.Ref<HTMLVideoElement>
@@ -14,6 +15,7 @@ export function Video({
 	onLoadedMetadata: () => void
 	onSeeking: () => void
 	onSeeked: () => void
+  onEnd?: () => void
 	settings: SettingsType
 } & React.HTMLAttributes<HTMLVideoElement>) {
 	return (
@@ -24,6 +26,7 @@ export function Video({
 			onLoadedMetadata={onLoadedMetadata}
 			onSeeking={onSeeking}
 			onSeeked={onSeeked}
+      onEnded={onEnd}
 			{...props}
 		>
 			<source src={settings.videoUrl || undefined} type="video/mp4" />

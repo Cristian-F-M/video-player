@@ -10,6 +10,7 @@ import Upload from './icons/Upload'
 import { getSettings, saveSettings } from './utils/settings'
 import { TimeControl } from './components/TimeControl'
 import { formatTime } from './utils/player'
+import Minimize from './icons/Minimize'
 
 type SettingsType = {
 	videoUrl?: string | null
@@ -544,7 +545,8 @@ function App() {
 									className="cursor-pointer hover:text-gray-100 transition-colors"
 									onClick={handleFullScreen}
 								>
-									<Maximize className="size-5 md:size-6" />
+									<Maximize className="size-5 md:size-6 fullscreen:hidden" />
+									<Minimize className="size-5 md:size-6 hidden fullscreen:block" />
 								</div>
 							</div>
 						</div>

@@ -1,54 +1,44 @@
-# React + TypeScript + Vite
+# Reproductor de vídeo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Un simple reproductor de vídeo que permite cargar un vídeo local o de una `URL` para visualizarlo y otras funciones.
 
-Currently, two official plugins are available:
+![Imagen del reproductor de vídeo](readme/video-player.avif)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<br>
 
-## Expanding the ESLint configuration
+## Funciones 
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Tecla            | Función                                                  |
+| ---------------- | -------------------------------------------------------- |
+| `.`              | Adelantar un frame configurable                          |
+| `,`              | Retroceder un frame configurable                         |
+| `M`              | Mutea el audio del vídeo                                 |
+| `J`              | Retroceder 10 segundos al vídeo                          |
+| `K` \- `Espacio` | Pausa el vídeo                                           |
+| `L`              | Adelantar 10 segundos al vídeo                           |
+| `F`              | Entrar en pantalla completa / Salir de pantalla completa |
+| `←`              | Retroceder 5 segundos al vídeo                           |
+| `→`              | Adelantar 5 segundos al vídeo                            |
+| `↑`              | Aumentar en 10% el volumen                               |
+| `↓`              | Disminuir en 10% el volumen                              |
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Configuraciones 
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+![Imagen del menú lateral](readme/side-menu.avif)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+En el menú lateral se puede realizar las siguientes acciones: 
+- Cargar un video desde el gestor de archivos
+- Asígnar directamente la `URL`
+- Modificar los frames por segundo que se utilizaran para adelantar (`.`) o retroceder (`,`) los frames del vídeo utilizando `1 / frames`
+- Modificar la velocidad de reproducción
+
+
+
+
+------------
+<br>
+<a href="https:/github.com/Cristian-F-M">
+  <img src="https://avatars.githubusercontent.com/u/116728863" alt="Foto de perfil del usuario Cristian Morales" style="border-radius: 9999999999px;" width="50" height="50">
+</a>
+ 

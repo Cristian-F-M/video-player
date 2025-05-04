@@ -46,6 +46,7 @@ function App() {
 		isPlaying: false,
 		volume: 100,
 	})
+	const [wasFullScreen, setWasFullScreen] = useState(false)
 
 	const isMobileDevice = useMemo(() => {
 		return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
@@ -240,6 +241,7 @@ function App() {
 
 		if (isFullScreen) return exitFullscreen()
 		requestFullScreen()
+		setWasFullScreen(true)
 	}, [])
 
 	const getIsFullScreen = useCallback(
@@ -259,6 +261,7 @@ function App() {
 
 		document.documentElement.classList.remove('full-screen')
 		document.exitFullscreen()
+		setWasFullScreen(false)
 	}, [getIsFullScreen])
 
 	const toggleControls = useCallback(() => {
@@ -296,7 +299,8 @@ function App() {
 
 	const closeSideMenu = useCallback(() => {
 		setIsSideMenuOpen(false)
-	}, [])
+		if (wasFullScreen) requestFullScreen()
+	}, [requestFullScreen, wasFullScreen])
 
 	const openSideMenu = useCallback(() => {
 		if (isPlaying) {
@@ -391,8 +395,16 @@ function App() {
 			saveSettings('frames', frames.value)
 			saveSettings('velocity', velocity.value)
 			closeSideMenu()
+			if (wasFullScreen) requestFullScreen()
 		},
-		[closeSideMenu, isMuted, isPlaying, volume]
+		[
+			closeSideMenu,
+			isMuted,
+			isPlaying,
+			volume,
+			requestFullScreen,
+			wasFullScreen,
+		]
 	)
 
 	useEffect(() => {

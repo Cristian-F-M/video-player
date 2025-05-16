@@ -7,7 +7,7 @@ import Maximize from './icons/Maximize'
 import Settings from './icons/Settings'
 import Close from './icons/X'
 import Upload from './icons/Upload'
-import { getSettings, saveSettings } from './utils/settings'
+import { getSettings, saveSettings, SPEED_OPTIONS } from './utils/settings'
 import { TimeControl } from './components/TimeControl'
 import { formatTime } from './utils/player'
 import Minimize from './icons/Minimize'
@@ -686,16 +686,16 @@ function App() {
 									name="velocity"
 									id="velocity"
 									className="block w-full rounded-sm p-1 h-9 px-2 border border-gray-400 max-w-md text-gray-300 text-xs  focus:outline-none cursor-pointer track:hidden [&>option]:text-gray-300  [&>option]:bg-gray-800"
-									defaultValue={settings.velocity}
 								>
-									<option value="0.25">0.25x</option>
-									<option value="0.5">0.5x</option>
-									<option value="0.75">0.75x</option>
-									<option value="1">1x (default)</option>
-									<option value="1.25">1.25x</option>
-									<option value="1.5">1.5x</option>
-									<option value="1.75">1.75x</option>
-									<option value="2">2x</option>
+									{SPEED_OPTIONS.map(({ id, text, value }) => (
+										<option
+											key={id}
+											value={value}
+											selected={settings.velocity === Number(value)}
+										>
+											{text}
+										</option>
+									))}
 								</select>
 							</div>
 							{/* end-Velocity */}
